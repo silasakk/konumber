@@ -128,6 +128,69 @@ add_action( 'wp_enqueue_scripts', 'king_scripts' );
 
 
 
+//--------------------------------------------------
+// REGISTER FUNCTION
+//--------------------------------------------------
+add_action( 'admin_post_register', 'prefix_admin_register' );
+add_action( 'admin_post_nopriv_register', 'prefix_admin_register' );
+function prefix_admin_register() {
+    global $wpdb;
+    $check_user = $wpdb->get_results("SELECT * from users where email = '".$_POST["email"]."' ");
+    if(count($check_user)){ 
+    	//Redirect
+    	set_flashdata(array("message"=>"Email นี้มีผู้ใช้แล้ว"));
+    	wp_redirect( site_url('register?msg=1') ); exit;
+    }else{
+    	//SQL --------------------------
+    	$data = array( 
+			'firstname' => $_POST["firstname"], 
+			'lastname' =>  $_POST["lastname"],
+			'email' => $_POST["email"], 
+			'psswd' => md5($_POST["psswd"]), 
+			'created_at' => date("Y-m-d H:i:s"), 
+
+		);
+    	//INSERT --------------------
+    	$wpdb->insert( "users", $data );
+    	//Redirect
+    	set_flashdata(array("message"=>"สมัครสมาชิกเรียบร้อยแล้ว กรุณาเข้าสู่ระบบ"));
+    	wp_redirect( site_url('register') ); exit;
+    }
+}
+
+//--------------------------------------------------
+// Login FUNCTION
+//--------------------------------------------------
+add_action( 'admin_post_login', 'prefix_admin_login' );
+add_action( 'admin_post_nopriv_login', 'prefix_admin_login' );
+function prefix_admin_login() {
+    global $wpdb;
+    $check_user = $wpdb->get_results("SELECT * from users where email = '".$_POST["email"]."' and psswd = '".md5($_POST["psswd"])."' ");
+    if(count($check_user)){ 
+
+    	//login success Redirect
+    	if(isset($_COOKIE["user_id"])){
+    		setcookie ('user_id', $check_user[0]->id, time()+2678400, COOKIEPATH, COOKIE_DOMAIN, false);		
+    	}else{
+    		$_COOKIE["user_id"] = $check_user[0]->id;	
+    	}
+
+    	set_flashdata(array("message"=>"SUCCESS"));
+    	wp_redirect( site_url('register') ); exit;
+    }else{
+    	//login fail Redirect
+    	set_flashdata(array("message"=>"FAIL"));
+    	wp_redirect( site_url('register') ); exit;
+	}
+}
+
+
+
+function get_user($user_id){
+	global $wpdb;
+    $check_user = $wpdb->get_results("SELECT * from users where id = '".$user_id."' ");
+    return $check_user[0];
+}
 
 
 
@@ -155,3 +218,10 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+/**
+ * Load Session
+ */
+require get_template_directory() . '/inc/session.php';
+
+

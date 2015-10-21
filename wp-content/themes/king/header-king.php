@@ -44,7 +44,12 @@
                 <a class="w-inline-block sp-lang-item" href="#"><img class="lang-item" src="<?php echo get_template_directory_uri() ?>/images/cn-cn.png">
                 </a>
             </div>
-            <div class="sp-account"><a class="sp-acc-a" href="login.html">SIGN IN</a><a class="sp-acc-a" href="#">REGISTER</a><a class="sp-acc-a" href="#"></a>
+
+            <?php if($_COOKIE["user_id"]): ?> 
+                <?php echo get_user($_COOKIE["user_id"])->email  ?>
+            <?php else: ?>
+                <div class="sp-account"><a class="sp-acc-a" href="login.html">SIGN IN</a><a class="sp-acc-a" href="#">REGISTER</a><a class="sp-acc-a" href="#"></a>
+            <?php endif; ?>
             </div>
         </div>
     </div>
