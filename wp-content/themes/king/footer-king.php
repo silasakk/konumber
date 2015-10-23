@@ -19,14 +19,17 @@
         <div class="txt-cpr">Copyright © 2015 KING OF NUMBER | All rights reserved.</div>
     </div>
 </div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<?php echo wp_footer() ?>
+
 <script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/webflow.js"></script>
 <script>
-    $(".txt-digit").on("keypress",function(){
+    jQuery(".txt-digit").on("keypress",function(){
 
-        $(".txt-digit").eq(parseInt($(".txt-digit").index($(this))) + 1).focus();
+        jQuery(".txt-digit").eq(parseInt(jQuery(".txt-digit").index($(this))) + 1).focus();
     })
 </script>
+
 <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>

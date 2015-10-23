@@ -114,7 +114,10 @@ add_action( 'widgets_init', 'king_widgets_init' );
  * Enqueue scripts and styles.
  */
 function king_scripts() {
-	wp_enqueue_style( 'king-style', get_stylesheet_uri() );
+	//wp_enqueue_style( 'king-style', get_stylesheet_uri() );
+	wp_enqueue_script('ajax-main', get_template_directory_uri() . '/js/main.js', array(), '', true);
+
+	wp_localize_script('ajax-main', 'ajax_object', array('ajaxUrl' => admin_url('admin-ajax.php') , 'siteUrl' => site_url()));
 
 	wp_enqueue_script( 'king-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
@@ -169,30 +172,48 @@ function prefix_admin_login() {
     if(count($check_user)){ 
 
     	//login success Redirect
-    	if(isset($_COOKIE["user_id"])){
+    	if(!isset($_COOKIE["user_id"])){
     		setcookie ('user_id', $check_user[0]->id, time()+2678400, COOKIEPATH, COOKIE_DOMAIN, false);		
     	}else{
     		$_COOKIE["user_id"] = $check_user[0]->id;	
     	}
-
-    	set_flashdata(array("message"=>"SUCCESS"));
-    	wp_redirect( site_url('register') ); exit;
+    	wp_redirect( site_url() ); exit;
     }else{
     	//login fail Redirect
-    	set_flashdata(array("message"=>"FAIL"));
+    	set_flashdata(array("message"=>"อีเมล์หรือพาสเวิร์ดไม่ถูกต้อง"));
     	wp_redirect( site_url('register') ); exit;
 	}
 }
 
+add_action( 'wp_ajax_user_logout', 'user_logout' );
+add_action( 'wp_ajax_nopriv_user_logout', 'user_logout' );
+
+function user_logout() {
+
+	setcookie ('user_id', '', time()-300, COOKIEPATH, COOKIE_DOMAIN, false);
+	return 1;
+	die;
+	// Handle request then generate response using WP_Ajax_Response
+}
 
 
+
+// get user
 function get_user($user_id){
 	global $wpdb;
     $check_user = $wpdb->get_results("SELECT * from users where id = '".$user_id."' ");
     return $check_user[0];
 }
+// block page
+function block_page( $query ) {
+	if ( $query->is_page( 'register' )) {
+		if($_COOKIE["user_id"]){
+			wp_redirect(site_url());exit;
+		}
 
-
+	}
+}
+add_action( 'pre_get_posts', 'block_page' );
 
 /**
  * Implement the Custom Header feature.

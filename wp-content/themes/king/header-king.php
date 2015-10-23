@@ -8,9 +8,11 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Webflow">
+    <?php wp_head() ?>
     <link rel="stylesheet" type="text/css" href="<?php echo  get_template_directory_uri() ?>/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="<?php echo  get_template_directory_uri() ?>/css/webflow.css">
     <link rel="stylesheet" type="text/css" href="<?php echo  get_template_directory_uri() ?>/css/kingofnumber.webflow.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo  get_template_directory_uri() ?>/css/king.css">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     <script>
         WebFont.load({
@@ -37,6 +39,7 @@
             <div class="w-hidden-main w-hidden-medium w-hidden-small sp-nav-mobile"><a class="sp-nav-mobile-a" href="#"></a>
             </div>
             <div class="sp-lang">
+                <a class="sp-acc-a" href="#"></a>
                 <a class="w-inline-block sp-lang-item" href="#"><img class="lang-item" src="<?php echo get_template_directory_uri() ?>/images/th-th.png">
                 </a>
                 <a class="w-inline-block sp-lang-item" href="#"><img class="lang-item" width="24" src="<?php echo get_template_directory_uri() ?>/images/en-en.png">
@@ -45,10 +48,23 @@
                 </a>
             </div>
 
-            <?php if($_COOKIE["user_id"]): ?> 
-                <?php echo get_user($_COOKIE["user_id"])->email  ?>
+            <?php if($_COOKIE["user_id"]): $user = get_user($_COOKIE["user_id"]) ?>
+
+            <div class="sp-account">
+                <a class="sp-acc-a" href="่javascript:;"><?php echo $user->email  ?></a>
+                <ul class="sp-acc-a-sub">
+                    <li><a href="#">เปลี่ยนรหัสผ่าน</a></li>
+                    <li><a  id="user_logout" href="#">ออกจากระบบ</a></li>
+                </ul>
+
+
+
+
+
+            </div>
+
             <?php else: ?>
-                <div class="sp-account"><a class="sp-acc-a" href="login.html">SIGN IN</a><a class="sp-acc-a" href="#">REGISTER</a><a class="sp-acc-a" href="#"></a>
+                <div class="sp-account"><a class="sp-acc-a" href="<?php echo site_url("register") ?>">SIGN IN</a><a class="sp-acc-a" href="<?php echo site_url("register") ?>">REGISTER</a>
             <?php endif; ?>
             </div>
         </div>

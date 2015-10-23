@@ -1,0 +1,30 @@
+.auth-msg {
+  padding: 10px;
+  border: 1px solid #1C4F7B;
+  color: #5b5b5b;
+  margin: 20px 30px 0 30px;
+  background: #133444;
+  color: #DEF0FF; }
+
+.w-input, .w-select, .btn-back-cart {
+  color: #fff; }
+
+.sp-account:hover {
+  color: #000; }
+  .sp-account:hover .sp-acc-a-sub {
+    display: block; }
+
+.sp-acc-a-sub {
+  display: none;
+  padding: 0;
+  margin-top: 9px;
+  list-style: none; }
+  .sp-acc-a-sub li {
+    background: #0B2236;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #0F3B61; }
+    .sp-acc-a-sub li a {
+      text-decoration: none; }
+
+/*# sourceMappingURL=king.css.map */
