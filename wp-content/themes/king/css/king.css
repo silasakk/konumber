@@ -1,3 +1,12 @@
+body {
+  padding-top: 40px; }
+
+.bar-head {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999999; }
+
 .auth-msg {
   padding: 10px;
   border: 1px solid #1C4F7B;
@@ -9,22 +18,96 @@
 .w-input, .w-select, .btn-back-cart {
   color: #fff; }
 
-.sp-account:hover {
-  color: #000; }
+.sp-account {
+  position: relative;
+  margin-top: 0;
+  line-height: 40px; }
+  .sp-account .sp-acc-a {
+    border-right: 1px solid #353D54;
+    padding-right: 20px; }
   .sp-account:hover .sp-acc-a-sub {
     display: block; }
 
-.sp-acc-a-sub {
+.badge {
+  padding: 0 5px;
+  margin: 5px;
+  background: #334973;
+  border-radius: 3px; }
+
+.sp-cart {
+  position: relative; }
+  .sp-cart:hover .sp-acc-a-cart {
+    display: block; }
+  .sp-cart .lang-item:hover .sp-acc-a-cart {
+    display: block; }
+
+.sp-acc-a-sub, .sp-acc-a-cart {
+  position: absolute;
+  width: 100%;
   display: none;
   padding: 0;
-  margin-top: 9px;
+  top: 40px;
+  left: 0;
   list-style: none; }
-  .sp-acc-a-sub li {
+  .sp-acc-a-sub li, .sp-acc-a-cart li {
     background: #0B2236;
-    padding: 10px;
+    padding: 0 10px;
     text-align: left;
-    border-bottom: 1px solid #0F3B61; }
-    .sp-acc-a-sub li a {
+    border-bottom: 1px solid #0F3B61;
+    color: #fff; }
+    .sp-acc-a-sub li a, .sp-acc-a-cart li a {
       text-decoration: none; }
+
+.sp-acc-a {
+  font-family: Rsu webfont; }
+  .sp-acc-a i {
+    font-size: 17px; }
+
+.cl-cart {
+  float: right;
+  display: inline-block;
+  cursor: pointer; }
+
+.cart-sec {
+  margin-bottom: 40px; }
+
+.con-info {
+  font-family: 'Rsu webfont', sans-serif;
+  padding: 60px 0;
+  color: #fff; }
+  .con-info .hh-lbl {
+    font-size: 16px;
+    margin-bottom: 10px; }
+  .con-info .hh-lbl2 {
+    padding: 10px 20px;
+    background: #092134;
+    border: 1px solid #0D304A; }
+
+.wpcf7 {
+  color: #fff;
+  font-family: 'Rsu webfont', sans-serif;
+  line-height: 140%;
+  padding: 60px 0 !important; }
+  .wpcf7 input[type='text'], .wpcf7 input[type='email'], .wpcf7 textarea {
+    margin-right: 0px;
+    border: 1px solid #15509e;
+    border-radius: 5px;
+    background-color: #092134;
+    font-family: 'Rsu webfont', sans-serif;
+    color: #adacac;
+    text-align: left;
+    width: 100%;
+    margin: 5px 0; }
+  .wpcf7 input[type='submit'] {
+    display: block;
+    width: 137px;
+    height: 50px;
+    margin-top: 22px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    text-indent: 999px;
+    background-image: url("../images/submit-search2.png"); }
 
 /*# sourceMappingURL=king.css.map */

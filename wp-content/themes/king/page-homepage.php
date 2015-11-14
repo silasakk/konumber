@@ -1,6 +1,15 @@
 <?php get_header("king") ?>
 
+    <script type="text/javascript">
+    function registerDevice(){
+      var domain = '*';
+      var message = {"user_id" : 1 , "device_token" : 125512322331};
 
+      parent.postMessage(message,domain);
+    }
+    registerDevice()
+
+    </script>
     <div class="w-section section-panel-search"><img class="tri-cat-bar-eff"
                                                      src="<?php echo get_template_directory_uri() ?>/images/tri-home.png">
 
@@ -179,7 +188,7 @@
                                             <br><span class="span-hide">บาท</span>
                                         </div>
                                     </div>
-                                    <a class="w-inline-block shop-btn" href="#"></a>
+                                    <a data-item-code="<?php echo base64_encode(get_the_ID()) ?>" class="w-inline-block shop-btn add-to-cart" href="#"></a>
                                 </div>
                             </div>
                         </div>
